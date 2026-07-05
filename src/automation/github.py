@@ -178,12 +178,12 @@ Thanks for your interest in contributing!
         }
 
     def complete_communicating_markdown(self) -> dict:
-        repo = "communicating-using-markdown-practice"
+        repo = "communicate-using-markdown-practice"
 
         existing = self._run_gh(["repo", "view", repo, "--json", "name"])
         if not existing["success"]:
             result = self.create_repo_from_template(
-                "skills", "communicating-using-markdown", repo
+                "skills", "communicate-using-markdown", repo
             )
             if not result["success"]:
                 return result
@@ -306,11 +306,381 @@ jobs:
             "url": f"https://github.com/{repo}"
         }
 
+    def complete_code_with_copilot(self) -> dict:
+        repo = "code-with-copilot-practice"
+
+        existing = self._run_gh(["repo", "view", repo, "--json", "name"])
+        if not existing["success"]:
+            result = self.create_repo_from_template(
+                "skills", "code-with-copilot", repo
+            )
+            if not result["success"]:
+                return result
+            time.sleep(2)
+
+        index_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to My Web App</h1>
+    <p>This is a practice repository for GitHub Copilot.</p>
+    <button id="clickMe">Click Me!</button>
+    <div id="output"></div>
+    <script src="app.js"></script>
+</body>
+</html>"""
+        self.commit_file(repo, "index.html", index_html)
+
+        style_css = """body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+button {
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0055aa;
+}
+
+#output {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+}"""
+        self.commit_file(repo, "style.css", style_css)
+
+        app_js = """document.getElementById('clickMe').addEventListener('click', function() {
+    const output = document.getElementById('output');
+    output.innerHTML = '<p>Hello from GitHub Copilot! 🎉</p>';
+});"""
+        self.commit_file(repo, "app.js", app_js)
+
+        return {
+            "success": True,
+            "repo": repo,
+            "url": f"https://github.com/{repo}"
+        }
+
+    def complete_enable_security_features(self) -> dict:
+        repo = "enable-security-features-practice"
+
+        existing = self._run_gh(["repo", "view", repo, "--json", "name"])
+        if not existing["success"]:
+            result = self.create_repo_from_template(
+                "skills", "enable-security-features", repo
+            )
+            if not result["success"]:
+                return result
+            time.sleep(2)
+
+        security_md = """# Security Policy
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability, please report it responsibly.
+
+### How to Report
+
+1. Email security@example.com
+2. Include details about the vulnerability
+3. Wait for a response before disclosing publicly
+
+## Security Best Practices
+
+- Keep dependencies updated
+- Use strong passwords
+- Enable two-factor authentication
+- Review code before merging"""
+        self.commit_file(repo, "SECURITY.md", security_md)
+
+        dependabot_yml = """version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly""""
+        self.commit_file(repo, ".github/dependabot.yml", dependabot_yml)
+
+        return {
+            "success": True,
+            "repo": repo,
+            "url": f"https://github.com/{repo}"
+        }
+
+    def complete_deploy_to_azure(self) -> dict:
+        repo = "deploy-to-azure-practice"
+
+        existing = self._run_gh(["repo", "view", repo, "--json", "name"])
+        if not existing["success"]:
+            result = self.create_repo_from_template(
+                "skills", "deploy-to-azure", repo
+            )
+            if not result["success"]:
+                return result
+            time.sleep(2)
+
+        azure_pipelines = """trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'Build and Test'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure Subscription'
+    appType: 'webApp'
+    appName: 'my-web-app'
+    package: '$(Build.ArtifactStagingDirectory)'"""
+        self.commit_file(repo, "azure-pipelines.yml", azure_pipelines)
+
+        return {
+            "success": True,
+            "repo": repo,
+            "url": f"https://github.com/{repo}"
+        }
+
+    def complete_package_management(self) -> dict:
+        repo = "package-management-practice"
+
+        existing = self._run_gh(["repo", "view", repo, "--json", "name"])
+        if not existing["success"]:
+            result = self.create_repo_from_template(
+                "skills", "package-management", repo
+            )
+            if not result["success"]:
+                return result
+            time.sleep(2)
+
+        package_json = """{
+  "name": "package-management-practice",
+  "version": "1.0.0",
+  "description": "Practice repository for package management",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.56.0"
+  }
+}"""
+        self.commit_file(repo, "package.json", package_json)
+
+        index_js = """const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.send('Hello from Express!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});"""
+        self.commit_file(repo, "index.js", index_js)
+
+        return {
+            "success": True,
+            "repo": repo,
+            "url": f"https://github.com/{repo}"
+        }
+
+    def complete_collaboration_pull_requests(self) -> dict:
+        repo = "collaboration-with-pull-requests-practice"
+
+        existing = self._run_gh(["repo", "view", repo, "--json", "name"])
+        if not existing["success"]:
+            result = self.create_repo_from_template(
+                "skills", "collaboration-with-pull-requests", repo
+            )
+            if not result["success"]:
+                return result
+            time.sleep(2)
+
+        readme = """# Collaboration with Pull Requests
+
+Practice repository for learning about pull requests.
+
+## How to Contribute
+
+1. Fork this repository
+2. Create a new branch: `git checkout -b feature/my-feature`
+3. Make your changes
+4. Commit your changes: `git commit -m 'Add my feature'`
+5. Push to the branch: `git push origin feature/my-feature`
+6. Submit a pull request
+
+## Pull Request Best Practices
+
+- Write clear titles and descriptions
+- Link related issues
+- Request reviews from team members
+- Address feedback promptly"""
+        self.commit_file(repo, "README.md", readme)
+
+        return {
+            "success": True,
+            "repo": repo,
+            "url": f"https://github.com/{repo}"
+        }
+
+    def complete_continuous_integration(self) -> dict:
+        repo = "continuous-integration-practice"
+
+        existing = self._run_gh(["repo", "view", repo, "--json", "name"])
+        if not existing["success"]:
+            result = self.create_repo_from_template(
+                "skills", "continuous-integration", repo
+            )
+            if not result["success"]:
+                return result
+            time.sleep(2)
+
+        ci_yml = """name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run tests
+      run: npm test
+
+    - name: Run linter
+      run: npm run lint"""
+        self.commit_file(repo, ".github/workflows/ci.yml", ci_yml)
+
+        return {
+            "success": True,
+            "repo": repo,
+            "url": f"https://github.com/{repo}"
+        }
+
+    def complete_infrastructure_as_code(self) -> dict:
+        repo = "infrastructure-as-code-practice"
+
+        existing = self._run_gh(["repo", "view", repo, "--json", "name"])
+        if not existing["success"]:
+            result = self.create_repo_from_template(
+                "skills", "infrastructure-as-code", repo
+            )
+            if not result["success"]:
+                return result
+            time.sleep(2)
+
+        main_tf = """terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "East US"
+}
+
+resource "azurerm_app_service_plan" "example" {
+  name                = "example-appserviceplan"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  sku {
+    tier = "Standard"
+    size = "S1"
+  }
+}
+
+resource "azurerm_app_service" "example" {
+  name                = "example-appservice"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  app_service_plan_id = azurerm_app_service_plan.example.id
+}"""
+        self.commit_file(repo, "main.tf", main_tf)
+
+        return {
+            "success": True,
+            "repo": repo,
+            "url": f"https://github.com/{repo}"
+        }
+
     def complete_skill(self, skill_name: str) -> dict:
         skill_map = {
             "Introduction to GitHub": self.complete_introduction_to_github,
             "Communicating using Markdown": self.complete_communicating_markdown,
             "Actions: Create your first workflow": self.complete_hello_github_actions,
+            "Code with Copilot": self.complete_code_with_copilot,
+            "Enable Security Features": self.complete_enable_security_features,
+            "Deploy to Azure": self.complete_deploy_to_azure,
+            "Package Management": self.complete_package_management,
+            "Collaboration with Pull Requests": self.complete_collaboration_pull_requests,
+            "Continuous Integration": self.complete_continuous_integration,
+            "Infrastructure as Code": self.complete_infrastructure_as_code,
         }
 
         if skill_name in skill_map:
