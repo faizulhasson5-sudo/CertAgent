@@ -17,6 +17,10 @@ from src.discovery.freecodecamp import FreeCodeCampDiscovery
 from src.discovery.kaggle import KaggleDiscovery
 from src.discovery.google import GoogleDiscovery
 from src.discovery.hubspot import HubSpotDiscovery
+from src.discovery.github_skills import GitHubSkillsDiscovery
+from src.discovery.microsoft import MicrosoftLearnDiscovery
+from src.discovery.google_cloud import GoogleCloudDiscovery
+from src.discovery.aws import AWSDiscovery
 from src.scheduler.scheduler import AgentScheduler
 from src.utils.helpers import random_delay
 from src.utils.logger import setup_logger
@@ -42,6 +46,10 @@ class CertAgent:
             KaggleDiscovery(self.db),
             GoogleDiscovery(self.db),
             HubSpotDiscovery(self.db),
+            GitHubSkillsDiscovery(self.db),
+            MicrosoftLearnDiscovery(self.db),
+            GoogleCloudDiscovery(self.db),
+            AWSDiscovery(self.db),
         ]
 
     def _load_config(self, path: str) -> dict:
