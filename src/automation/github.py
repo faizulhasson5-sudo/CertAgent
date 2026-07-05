@@ -271,7 +271,7 @@ class GitHubSkillsAutomation:
         existing = self._run_gh(["repo", "view", repo, "--json", "name"])
         if not existing["success"]:
             result = self.create_repo_from_template(
-                "skills", "code-with-copilot", repo
+                "skills", "getting-started-with-github-copilot", repo
             )
             if not result["success"]:
                 return result
