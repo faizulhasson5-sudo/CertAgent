@@ -1,0 +1,79 @@
+# CertAgent Configuration
+
+agent:
+  name: "CertAgent"
+  check_interval_hours: 2
+  max_courses_simultaneous: 3
+  auto_submit_threshold: 85  # AI confidence % to auto-submit
+  headless: false  # Set to true after testing
+
+platforms:
+  freecodecamp:
+    enabled: true
+    base_url: "https://www.freecodecamp.org"
+    certifications:
+      - name: "Responsive Web Design"
+        url: "https://www.freecodecamp.org/learn/2022/responsive-web-design/"
+      - name: "JavaScript Algorithms and Data Structures"
+        url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/"
+      - name: "Front End Development Libraries"
+        url: "https://www.freecodecamp.org/learn/front-end-development-libraries/"
+      - name: "Data Visualization"
+        url: "https://www.freecodecamp.org/learn/data-visualization/"
+      - name: "Apis and Microservices"
+        url: "https://www.freecodecamp.org/learn/back-end-development-and-apis/"
+      - name: "Quality Assurance"
+        url: "https://www.freecodecamp.org/learn/quality-assurance/"
+      - name: "Scientific Computing with Python"
+        url: "https://www.freecodecamp.org/learn/scientific-computing-with-python/"
+      - name: "Data Analysis with Python"
+        url: "https://www.freecodecamp.org/learn/data-analysis-with-python/"
+      - name: "Machine Learning with Python"
+        url: "https://www.freecodecamp.org/learn/machine-learning-with-python/"
+
+  kaggle:
+    enabled: true
+    base_url: "https://www.kaggle.com/learn"
+    courses:
+      - "intro-to-machine-learning"
+      - "intermediate-machine-learning"
+      - "intro-to-deep-learning"
+      - "computer-vision"
+      - "feature-engineering"
+      - "intro-to-sql"
+      - "advanced-sql"
+      - "intro-to-ai-ethics"
+
+  google:
+    enabled: true
+    base_url: "https://learndigital.withgoogle.com"
+    courses:
+      - "digital-marketing"
+      - "fundamentals-of-digital-marketing"
+
+  hubspot:
+    enabled: true
+    base_url: "https://academy.hubspot.com"
+    courses:
+      - "inbound-marketing"
+      - "content-marketing"
+      - "email-marketing"
+      - "social-media-marketing"
+
+notifications:
+  email:
+    enabled: true
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+
+ai:
+  provider: "ollama"
+  model: "llama3.2:1b"
+  temperature: 0.3
+  max_tokens: 2048
+
+paths:
+  certificates: "data/certificates"
+  screenshots: "data/screenshots"
+  database: "data/cert_agent.db"
+  logs: "logs"

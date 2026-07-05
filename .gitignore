@@ -1,0 +1,27 @@
+# Environment
+.env
+.env.local
+
+# Data
+data/*.db
+data/browser_state.json
+data/certificates/
+data/screenshots/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
