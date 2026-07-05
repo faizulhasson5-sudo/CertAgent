@@ -423,7 +423,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly""""
+      interval: "weekly"
         self.commit_file(repo, ".github/dependabot.yml", dependabot_yml)
 
         return {
