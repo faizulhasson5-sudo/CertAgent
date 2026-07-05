@@ -109,19 +109,20 @@ class CertAgent:
 
         self.db.start_course(course["id"])
 
-        result = gh.complete_github_skill(course["name"])
+        result = gh.complete_skill(course["name"])
 
         if result["success"]:
-            logger.info(f"Created practice repo: {result.get('url', '')}")
-            self.db.update_course_progress(course["id"], 50)
-            self.db.log_activity("github_skill",
-                f"Started {course['name']}: {result.get('url', '')}")
+            logger.info(f"Completed skill: {course['name']}")
+            self.db.update_course_progress(course["id"], 100)
+            self.db.complete_course(course["id"], result.get("url", ""))
+            self.db.log_activity("github_skill_completed",
+                f"Completed {course['name']}: {result.get('url', '')}")
 
             self.notifier.send_notification(
-                f"GitHub Skill Started: {course['name']}",
-                f"Practice repo created: {result.get('url', '')}\n\n"
-                f"Complete the tasks:\n" +
-                "\n".join(f"- {s}" for s in result.get("steps", []))
+                f"GitHub Skill Completed: {course['name']}",
+                f"Repo: {result.get('url', '')}\n\n"
+                f"Files created: {', '.join(result.get('files_created', []))}\n\n"
+                f"Badge should be awarded soon!"
             )
         else:
             logger.error(f"Failed: {result.get('error', 'Unknown error')}")
