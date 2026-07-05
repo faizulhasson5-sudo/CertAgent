@@ -94,6 +94,39 @@ class CertAgent:
     def _work_on_course(self, course: dict):
         logger.info(f"Working on: {course['name']} ({course['platform']})")
 
+        if course["platform"] == "github_skills":
+            self._work_on_github_skill(course)
+        else:
+            self._work_on_browser_course(course)
+
+    def _work_on_github_skill(self, course: dict):
+        from src.automation.github import GitHubSkillsAutomation
+
+        gh = GitHubSkillsAutomation()
+        if not gh.is_authenticated:
+            logger.error("GitHub CLI not authenticated")
+            return
+
+        self.db.start_course(course["id"])
+
+        result = gh.complete_github_skill(course["name"])
+
+        if result["success"]:
+            logger.info(f"Created practice repo: {result.get('url', '')}")
+            self.db.update_course_progress(course["id"], 50)
+            self.db.log_activity("github_skill",
+                f"Started {course['name']}: {result.get('url', '')}")
+
+            self.notifier.send_notification(
+                f"GitHub Skill Started: {course['name']}",
+                f"Practice repo created: {result.get('url', '')}\n\n"
+                f"Complete the tasks:\n" +
+                "\n".join(f"- {s}" for s in result.get("steps", []))
+            )
+        else:
+            logger.error(f"Failed: {result.get('error', 'Unknown error')}")
+
+    def _work_on_browser_course(self, course: dict):
         with BrowserManager(headless=self.config["agent"]["headless"]) as bm:
             self.db.start_course(course["id"])
 
