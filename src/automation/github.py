@@ -348,12 +348,12 @@ class GitHubSkillsAutomation:
         }
 
     def complete_enable_security_features(self) -> dict:
-        repo = "enable-security-features-practice"
+        repo = "secure-repository-supply-chain-practice"
 
         existing = self._run_gh(["repo", "view", repo, "--json", "name"])
         if not existing["success"]:
             result = self.create_repo_from_template(
-                "skills", "enable-security-features", repo
+                "skills", "secure-repository-supply-chain", repo
             )
             if not result["success"]:
                 return result
@@ -449,12 +449,12 @@ class GitHubSkillsAutomation:
         }
 
     def complete_package_management(self) -> dict:
-        repo = "package-management-practice"
+        repo = "publish-docker-images-practice"
 
         existing = self._run_gh(["repo", "view", repo, "--json", "name"])
         if not existing["success"]:
             result = self.create_repo_from_template(
-                "skills", "package-management", repo
+                "skills", "publish-docker-images", repo
             )
             if not result["success"]:
                 return result
@@ -504,12 +504,12 @@ class GitHubSkillsAutomation:
         }
 
     def complete_collaboration_pull_requests(self) -> dict:
-        repo = "collaboration-with-pull-requests-practice"
+        repo = "review-pull-requests-practice"
 
         existing = self._run_gh(["repo", "view", repo, "--json", "name"])
         if not existing["success"]:
             result = self.create_repo_from_template(
-                "skills", "collaboration-with-pull-requests", repo
+                "skills", "review-pull-requests", repo
             )
             if not result["success"]:
                 return result
@@ -545,12 +545,12 @@ class GitHubSkillsAutomation:
         }
 
     def complete_continuous_integration(self) -> dict:
-        repo = "continuous-integration-practice"
+        repo = "test-with-actions-practice"
 
         existing = self._run_gh(["repo", "view", repo, "--json", "name"])
         if not existing["success"]:
             result = self.create_repo_from_template(
-                "skills", "continuous-integration", repo
+                "skills", "test-with-actions", repo
             )
             if not result["success"]:
                 return result
